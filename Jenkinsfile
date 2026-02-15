@@ -12,13 +12,18 @@ pipeline {
                 }
             }
         }
-
         stage("build image") {
             steps {
-                echo 'testing the application...'
+                script {
+                    echo "building the docker image..."
+                    withCredentials([usernamePassword(credentialsId: 'docker-hub-repo', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+                        sh 'docker build -t devnonso/demo-ap:jma-2.0 .'
+                        sh 'echo $PASS docker login -u $USER --password-stdin'
+                        sh 'docker push devnonso/demo-app:jma-2.0'
+                    }
+                }
             }
         }
-
         stage("deploy") {
             steps {
                 script {
