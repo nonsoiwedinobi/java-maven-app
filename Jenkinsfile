@@ -72,7 +72,7 @@ pipeline {
                                     passwordVariable: 'PASS',
                                     usernameVariable: 'USER'
                             )
-                    ])
+                    ]) {
                     sh 'git config --global user.email "jenkins@example.com"'
                     sh 'git config --global user.name "jenkins"'
 
@@ -83,7 +83,7 @@ pipeline {
                     sh 'git remote set-url origin https://${USER}:${PASS}@github.com/nonsoiwedinobi/java-maven-app.git'
                     sh 'git add .'
                     sh 'git commit -m "ci: version bump"'
-                    sh 'git push origin HEAD:jenkins-jobs'
+                    sh 'git push origin HEAD:jenkins-jobs' }
                 }
             }
         }
